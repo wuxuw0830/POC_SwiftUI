@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  app
 //
-//  Created by Reed on 2024/8/5.
+//  Created by Kelly on 2024/8/5.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -24,18 +24,18 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
-#if os(macOS)
+            #if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
+            #endif
             .toolbar {
-#if os(iOS)
+            #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-#endif
+            #endif
                 ToolbarItem {
                     Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                        Label("Add for Item", systemImage: "plus")
                     }
                 }
             }
@@ -43,14 +43,14 @@ struct ContentView: View {
             Text("Select an item")
         }
     }
-
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
             modelContext.insert(newItem)
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
